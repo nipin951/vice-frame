@@ -7,70 +7,66 @@
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<main class="editorShell">
-  <section class="controlPanel">
-    <h1 class="brandTitle">VICE FRAME</h1>
-    <p class="brandTagline">Your photos, a sunset grade and poster lettering — a GTA-style cover in three steps.</p>
-
+<main class="shell">
+  <aside class="panel">
+    <h1 class="logo">VICE FRAME</h1>
+    <p class="tag">Turn your photos into a sun-drenched poster cover. Pick a layout, grade it, add the big type, export.</p>
     <h2>1 · Photos</h2>
-    <label class="uploadButton">Add your photos
+    <label class="upload">Add your photos
       <input id="photoInput" type="file" accept="image/*" multiple>
     </label>
-    <div id="sampleStrip" class="sampleStrip" aria-label="Sample photos"></div>
-    <p id="selectedPanelHint" class="hintText"></p>
-
+    <div id="sampleStrip" class="strip" aria-label="Sample photos"></div>
+    <p id="selectedPanelHint" class="hint"></p>
     <h2>2 · Layout &amp; size</h2>
-    <div class="buttonRow" role="group" aria-label="Panel layout">
+    <div class="row" role="group" aria-label="Layout">
       <button type="button" data-layout="vice">Vice</button>
       <button type="button" data-layout="grid">Grid</button>
       <button type="button" data-layout="trio">Trio</button>
       <button type="button" data-layout="solo">Solo</button>
     </div>
-    <div class="buttonRow" role="group" aria-label="Post size">
+    <div class="row" role="group" aria-label="Size">
       <button type="button" data-size="square">1080 × 1080</button>
       <button type="button" data-size="portrait">1080 × 1350</button>
       <button type="button" data-size="wide">1920 × 1080</button>
     </div>
-
     <h2>3 · Words &amp; grade</h2>
-    <label class="fieldLabel">Kicker
+    <label class="field">Kicker
       <input id="kickerInput" type="text" maxlength="30" value="Welcome to">
     </label>
-    <label class="fieldLabel">Caption
+    <label class="field">Caption
       <input id="captionInput" type="text" maxlength="26" value="Neon Vice">
     </label>
-    <label class="fieldLabel">Sunset grade
+    <label class="field">Sunset grade
       <input id="gradeSlider" type="range" min="0" max="100" value="65">
     </label>
-    <label class="fieldLabel">Grade flavour
+    <label class="field">Grade flavour
       <select id="gradeModeSelect">
-        <option value="sunset" selected>Sunset (teal &amp; pink)</option>
-        <option value="neon">Neon nights (cyan &amp; magenta)</option>
-        <option value="gold">Golden hour (amber)</option>
+        <option value="sunset" selected>Sunset — teal &amp; pink</option>
+        <option value="neon">Neon — cyan &amp; magenta</option>
+        <option value="gold">Gold — amber hour</option>
       </select>
     </label>
-    <label class="fieldLabel">Panel zoom (selected)
+    <label class="field">Zoom (selected panel)
       <input id="zoomSlider" type="range" min="100" max="400" value="100">
     </label>
-    <label class="fieldLabel">Gutter width
+    <label class="field">Gutter width
       <input id="gutterSlider" type="range" min="0" max="28" value="10">
     </label>
-    <label class="fieldLabel">Frame colour
+    <label class="field">Frame colour
       <select id="frameSelect">
         <option value="#ffffff" selected>White</option>
         <option value="#0d0d12">Black</option>
         <option value="#ffd166">Gold</option>
       </select>
     </label>
-    <label class="checkLabel">
+    <label class="check">
       <input id="captionTopToggle" type="checkbox"> Caption at the top
     </label>
-
-    <button id="exportButton" type="button" class="exportButton">Export cover PNG</button>
-    <p id="exportStatus" class="hintText" role="status"></p>
-  </section>
-  <section class="previewStage">
-    <canvas id="coverCanvas" width="1080" height="1350" aria-label="Live cover preview"></canvas>
+    <button id="exportButton" type="button" class="export">Export cover PNG</button>
+    <p id="exportStatus" class="hint" role="status"></p>
+  </aside>
+  <section class="stage">
+    <canvas id="coverCanvas" width="1080" height="1350" aria-label="Cover preview"></canvas>
   </section>
 </main>
 <script type="module" src="./src/main.js"></script>

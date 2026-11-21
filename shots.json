@@ -1,1 +1,6 @@
-[{"h":1280,"name":"1-cover.jpg","query":"?shot=cover&size=portrait&layout=vice&photos=heroine,driver,speedboat&caption=Neon%20Vice&kicker=Welcome%20to","w":1024},{"h":720,"name":"2-editor.jpg","query":"?shot=editor&size=portrait&layout=vice&photos=heroine,driver,speedboat,driver&caption=Neon%20Vice&kicker=Welcome%20to","w":1280},{"h":720,"name":"3-cover.jpg","query":"?shot=cover&size=wide&layout=vice&photos=driver,speedboat,heroine&caption=Sunset%20Heist&kicker=One%20last%20ride&mode=neon","w":1280},{"h":1080,"name":"4-cover.jpg","query":"?shot=cover&size=square&layout=grid&photos=heroine,driver,speedboat,boulevard&caption=Beach%20Money&kicker=Vice%20Frame%20presents","w":1080}]
+[
+  {"name":"1-cover.jpg","w":1024,"h":1280,"query":"?shot=cover&size=portrait&layout=vice&photos=heroine,driver,speedboat&caption=Neon%20Vice&kicker=Welcome%20to"},
+  {"name":"2-editor.jpg","w":1280,"h":720,"query":"?shot=editor&size=portrait&layout=vice&photos=heroine,driver,speedboat&caption=Neon%20Vice&kicker=Welcome%20to"},
+  {"name":"3-cover.jpg","w":1280,"h":720,"query":"?shot=cover&size=wide&layout=vice&photos=driver,speedboat,heroine&caption=Sunset%20Heist&kicker=One%20last%20ride&mode=neon"},
+  {"name":"4-cover.jpg","w":1080,"h":1080,"query":"?shot=cover&size=square&layout=grid&photos=heroine,driver,speedboat,boulevard&caption=Beach%20Money&kicker=Vice%20Frame%20presents"}
+]
