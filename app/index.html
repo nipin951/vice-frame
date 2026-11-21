@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Frame — GTA-style cover art maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="editorShell">
+  <section class="controlPanel">
+    <h1 class="brandTitle">VICE FRAME</h1>
+    <p class="brandTagline">Your photos, a sunset grade and poster lettering — a GTA-style cover in three steps.</p>
+
+    <h2>1 · Photos</h2>
+    <label class="uploadButton">Add your photos
+      <input id="photoInput" type="file" accept="image/*" multiple>
+    </label>
+    <div id="sampleStrip" class="sampleStrip" aria-label="Sample photos"></div>
+    <p id="selectedPanelHint" class="hintText"></p>
+
+    <h2>2 · Layout &amp; size</h2>
+    <div class="buttonRow" role="group" aria-label="Panel layout">
+      <button type="button" data-layout="vice">Vice</button>
+      <button type="button" data-layout="grid">Grid</button>
+      <button type="button" data-layout="trio">Trio</button>
+      <button type="button" data-layout="solo">Solo</button>
+    </div>
+    <div class="buttonRow" role="group" aria-label="Post size">
+      <button type="button" data-size="square">1080 × 1080</button>
+      <button type="button" data-size="portrait">1080 × 1350</button>
+      <button type="button" data-size="wide">1920 × 1080</button>
+    </div>
+
+    <h2>3 · Words &amp; grade</h2>
+    <label class="fieldLabel">Kicker
+      <input id="kickerInput" type="text" maxlength="30" value="Welcome to">
+    </label>
+    <label class="fieldLabel">Caption
+      <input id="captionInput" type="text" maxlength="26" value="Neon Vice">
+    </label>
+    <label class="fieldLabel">Sunset grade
+      <input id="gradeSlider" type="range" min="0" max="100" value="65">
+    </label>
+    <label class="fieldLabel">Panel zoom (selected)
+      <input id="zoomSlider" type="range" min="100" max="400" value="100">
+    </label>
+    <label class="fieldLabel">Gutter width
+      <input id="gutterSlider" type="range" min="0" max="28" value="10">
+    </label>
+    <label class="fieldLabel">Frame colour
+      <select id="frameSelect">
+        <option value="#ffffff" selected>White</option>
+        <option value="#0d0d12">Black</option>
+        <option value="#ffd166">Gold</option>
+      </select>
+    </label>
+    <label class="checkLabel">
+      <input id="captionTopToggle" type="checkbox"> Caption at the top
+    </label>
+
+    <button id="exportButton" type="button" class="exportButton">Export cover PNG</button>
+    <p id="exportStatus" class="hintText" role="status"></p>
+  </section>
+  <section class="previewStage">
+    <canvas id="coverCanvas" width="1080" height="1350" aria-label="Live cover preview"></canvas>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
