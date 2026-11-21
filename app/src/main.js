@@ -141,6 +141,10 @@ function bindControls() {
     state.grade = Number(e.target.value) / 100;
     renderCover();
   });
+  document.getElementById('gradeModeSelect').addEventListener('change', (e) => {
+    state.gradeMode = e.target.value;
+    renderCover();
+  });
   document.getElementById('gutterSlider').addEventListener('input', (e) => {
     state.gutter = Number(e.target.value);
     renderCover();
@@ -241,6 +245,7 @@ async function applyShotParams(params) {
   if (params.get('caption') !== null) state.caption = params.get('caption');
   if (params.get('kicker') !== null) state.kicker = params.get('kicker');
   if (params.get('grade') !== null) state.grade = Number(params.get('grade'));
+  if (params.get('mode') !== null) state.gradeMode = params.get('mode');
   if (params.get('top') === '1') state.captionAtTop = true;
 
   const photoList = (params.get('photos') ?? params.get('photo') ?? '')

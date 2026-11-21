@@ -53,11 +53,19 @@ export function makeCoverState() {
     caption: 'Neon Vice',
     kicker: 'WELCOME TO',
     grade: 0.65,
+    gradeMode: 'sunset',
     gutter: 10,
     frame: '#ffffff',
     captionAtTop: false,
   };
 }
+
+// Colour recipes for the grade: teal from the top, a warm band, a hot colour low.
+export const GRADE_MODES = {
+  sunset: { top: [24, 160, 190], band: [255, 110, 60], low: [215, 38, 116], vig: [8, 2, 18] },
+  neon: { top: [64, 224, 255], band: [150, 80, 255], low: [255, 43, 214], vig: [4, 0, 24] },
+  gold: { top: [64, 120, 160], band: [255, 170, 60], low: [200, 90, 20], vig: [16, 8, 2] },
+};
 
 export function setLayout(state, layoutId) {
   const layout = PANEL_LAYOUTS[layoutId];
@@ -89,14 +97,17 @@ function drawPhotoInPanel(ctx, panel, x, y, w, h) {
   ctx.drawImage(img, dx, dy, dw, dh);
 }
 
-// The sunset grade inside one panel: teal from the top, hot pink low, a warm sun band.
-function gradePanel(ctx, x, y, w, h, amount) {
+// The colour grade inside one panel: cool from the top, a warm band, a hot colour low.
+function gradePanel(ctx, x, y, w, h, amount, mode) {
   if (amount <= 0) return;
+  const [tr, tg, tb] = mode.top;
+  const [br, bg, bb] = mode.band;
+  const [lr, lg, lb] = mode.low;
   const top = ctx.createLinearGradient(0, y, 0, y + h);
-  top.addColorStop(0, `rgba(24, 160, 190, ${0.16 * amount})`);
+  top.addColorStop(0, `rgba(${tr}, ${tg}, ${tb}, ${0.16 * amount})`);
   top.addColorStop(0.45, 'rgba(0,0,0,0)');
-  top.addColorStop(0.78, `rgba(255, 110, 60, ${0.14 * amount})`);
-  top.addColorStop(1, `rgba(215, 38, 116, ${0.34 * amount})`);
+  top.addColorStop(0.78, `rgba(${br}, ${bg}, ${bb}, ${0.14 * amount})`);
+  top.addColorStop(1, `rgba(${lr}, ${lg}, ${lb}, ${0.34 * amount})`);
   ctx.fillStyle = top;
   ctx.fillRect(x, y, w, h);
 }
@@ -116,22 +127,24 @@ function drawPanelCollage(ctx, w, h, state) {
     ctx.rect(px, py, pw, ph);
     ctx.clip();
     drawPhotoInPanel(ctx, state.panels[i], px, py, pw, ph);
-    gradePanel(ctx, px, py, pw, ph, state.grade);
+    gradePanel(ctx, px, py, pw, ph, state.grade, GRADE_MODES[state.gradeMode] ?? GRADE_MODES.sunset);
     ctx.restore();
   });
 }
 
-function applyGlobalGrade(ctx, w, h, amount) {
+function applyGlobalGrade(ctx, w, h, amount, mode) {
   if (amount <= 0) return;
+  const [br, bg, bb] = mode.band;
+  const [vr, vg, vb] = mode.vig;
   const warm = ctx.createLinearGradient(0, 0, 0, h);
-  warm.addColorStop(0, `rgba(255, 170, 60, ${0.08 * amount})`);
+  warm.addColorStop(0, `rgba(${br}, ${bg}, ${bb}, ${0.08 * amount})`);
   warm.addColorStop(0.5, 'rgba(0,0,0,0)');
-  warm.addColorStop(1, `rgba(30, 6, 44, ${0.22 * amount})`);
+  warm.addColorStop(1, `rgba(${vr}, ${vg}, ${vb}, ${0.22 * amount})`);
   ctx.fillStyle = warm;
   ctx.fillRect(0, 0, w, h);
   const vig = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.42, w / 2, h / 2, Math.max(w, h) * 0.78);
   vig.addColorStop(0, 'rgba(0,0,0,0)');
-  vig.addColorStop(1, `rgba(8, 2, 18, ${0.36 * amount})`);
+  vig.addColorStop(1, `rgba(${vr}, ${vg}, ${vb}, ${0.36 * amount})`);
   ctx.fillStyle = vig;
   ctx.fillRect(0, 0, w, h);
 }
@@ -197,7 +210,7 @@ export function drawCover(canvas, state) {
   const ctx = canvas.getContext('2d');
   const { width: w, height: h } = canvas;
   drawPanelCollage(ctx, w, h, state);
-  applyGlobalGrade(ctx, w, h, state.grade);
+  applyGlobalGrade(ctx, w, h, state.grade, GRADE_MODES[state.gradeMode] ?? GRADE_MODES.sunset);
   drawCaptionLettering(ctx, w, h, state);
 }
 
